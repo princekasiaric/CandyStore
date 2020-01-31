@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CandyShop.Domain.Models\CandyShop.Domain.Models.csproj" />
+    <ProjectReference Include="..\CandyShop.Persistence\CandyShop.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>
