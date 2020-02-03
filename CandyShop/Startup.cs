@@ -1,12 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CandyShop.Persistence;
 using CandyShop.Persistence.Repository;
+using CandyShop.Persistence.UnitOfWorks;
+using CandyShop.Persistence.UnitOfWorks.Implementation;
+using CandyShop.Service.Services;
+using CandyShop.Service.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +31,12 @@ namespace CandyShop
             services.AddControllersWithViews();
             services.AddScoped<ICandyRepo, CandyRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ICandyService, CandyService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+            //var config = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
+            //services.AddSingleton(c => config.CreateMapper());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

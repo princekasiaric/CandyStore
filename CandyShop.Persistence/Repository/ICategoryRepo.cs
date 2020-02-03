@@ -5,6 +5,7 @@ namespace CandyShop.Persistence.Repository
 {
     public interface ICategoryRepo
     {
-        IEnumerable<Category> GetAllCategorires { get; }
+        IEnumerable<Category> GetAllCategories { get; }
+        void Update(Category category);
     }
 }

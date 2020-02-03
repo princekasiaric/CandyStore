@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
 {
@@ -15,7 +16,7 @@ namespace CandyShop.Persistence.Repository
         {
             get
             {
-                return AppDbContext.Candies.Include(c => c.Category);
+                return AppDbContext.Candies.Include(c => c.Category).AsNoTracking();
             }
         }
 
@@ -23,13 +24,18 @@ namespace CandyShop.Persistence.Repository
         {
             get
             {
-                return AppDbContext.Candies.Include(c => c.Category).Where(c => c.IsOnSale);
+                return AppDbContext.Candies.Include(c => c.Category).Where(c => c.IsOnSale).AsNoTracking();
             }
         }
 
-        public Candy GetCandyById(int candyId)
+        public async Task<Candy> GetCandyById(int candyId)
         {
-            return AppDbContext.Candies.FirstOrDefault(c => c.CandyId.Equals(candyId));
+            return await AppDbContext.Candies.FirstOrDefaultAsync(c => c.CandyId == candyId);
+        }
+
+        public void Update(Candy candy)
+        {
+            _context.Update(candy);
         }
 
         public AppDbContext AppDbContext => _context as AppDbContext;

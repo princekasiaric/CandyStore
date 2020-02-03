@@ -1,32 +1,45 @@
 ﻿using CandyShop.DomainModels;
-using CandyShop.Persistence.Repository;
+using CandyShop.Models;
+using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CandyShop.Controllers
 {
     public class CandyController : Controller
     {
-        private readonly ICandyRepo _candyRepo;
-        private readonly ICategoryRepo _categoryRepo;
+        private readonly ICandyService _candyService;
 
-        public CandyController(ICandyRepo candyRepo, ICategoryRepo categoryRepo)
+        public CandyController(ICandyService candyService)
         {
-            _candyRepo = candyRepo;
-            _categoryRepo = categoryRepo;
+            _candyService = candyService;
         }
 
-        public ViewResult List()
+        public IActionResult List()
         {
-            //ViewBag.CurrentCategory = "BestSellers";
-            //return View(_candyRepo.GetAllCandy);
-            var model = new CandyListViewModel();
-            model.Candies = _candyRepo.GetAllCandy;
-            model.CurrentCategory = "BestSellers";
+            var model = new CandyListViewModel
+            {
+                Candies = _candyService.GetAllCandies,
+                CurrentCategory = "BestSellers"
+            };
             return View(model);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var candy = await _candyService.GetCandyById(id);
+            if (candy == null)
+            {
+                return NotFound();
+            }
+            //var model = new CandyDetailsViewModel
+            //{
+            //    Name = candy.Name,
+            //    ImageUrl = candy.ImageUrl,
+            //    Price = candy.Price,
+            //    Description = candy.Description
+            //};
+            return View(candy);
         }
     }
 }

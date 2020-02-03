@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository.Implementation
@@ -27,7 +26,7 @@ namespace CandyShop.Persistence.Repository.Implementation
             return _context.Set<TEntity>().Where(predicate).AsNoTracking();
         }
 
-        public void Remove(TEntity entity)
+        public virtual void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
         }

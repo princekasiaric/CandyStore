@@ -8,8 +8,13 @@ namespace CandyShop.Persistence.Repository
     {
         public CategoryRepo(AppDbContext context) : base(context){}
 
-        public IEnumerable<Category> GetAllCategorires => AppDbContext.Categories;
+        public IEnumerable<Category> GetAllCategories => AppDbContext.Categories;
 
         public AppDbContext AppDbContext => _context as AppDbContext;
+
+        public void Update(Category category)
+        {
+            _context.Update(category);
+        }
     }
 }

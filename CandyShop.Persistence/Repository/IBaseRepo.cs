@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
@@ -11,5 +10,6 @@ namespace CandyShop.Persistence.Repository
         IEnumerable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> predicate);
         Task Add(TEntity entity);
         void Remove(TEntity entity);
+        //void RemoveRange()
     }
 }
