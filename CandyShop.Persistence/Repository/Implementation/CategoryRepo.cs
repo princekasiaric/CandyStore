@@ -10,11 +10,11 @@ namespace CandyShop.Persistence.Repository
 
         public IEnumerable<Category> GetAllCategories => AppDbContext.Categories;
 
-        public AppDbContext AppDbContext => _context as AppDbContext;
-
         public void Update(Category category)
         {
             _context.Update(category);
         }
+
+        public AppDbContext AppDbContext => _context as AppDbContext;
     }
 }

@@ -10,6 +10,6 @@ namespace CandyShop.Persistence.Repository
         IEnumerable<TEntity> FindByCondition(Expression<Func<TEntity, bool>> predicate);
         Task Add(TEntity entity);
         void Remove(TEntity entity);
-        //void RemoveRange()
+        void RemoveRange(IEnumerable<TEntity> entities);
     }
 }

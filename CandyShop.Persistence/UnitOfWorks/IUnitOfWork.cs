@@ -8,6 +8,8 @@ namespace CandyShop.Persistence.UnitOfWorks
     {
         ICandyRepo Candies { get; }
         ICategoryRepo Categories { get; }
+        IShoppingCartRepo ShoppingCarts { get; }
+        IShoppingCartItemRepo ShoppingCartItems { get; }
 
         Task<int> CommitAsync();
     }

@@ -30,5 +30,10 @@ namespace CandyShop.Persistence.Repository.Implementation
         {
             _context.Set<TEntity>().Remove(entity);
         }
+
+        public void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            _context.Set<TEntity>().RemoveRange(entities);
+        }
     }
 }
