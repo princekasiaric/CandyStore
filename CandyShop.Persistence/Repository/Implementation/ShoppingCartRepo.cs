@@ -12,7 +12,7 @@ namespace CandyShop.Persistence.Repository.Implementation
     public class ShoppingCartRepo : BaseRepo<ShoppingCartItem>, IShoppingCartRepo
     {
         public string ShoppingCartId { get; set; }
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public IList<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         public ShoppingCartRepo(AppDbContext context) : base(context){ }
 
@@ -34,22 +34,22 @@ namespace CandyShop.Persistence.Repository.Implementation
             return shoppingCartItem;
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public IList<ShoppingCartItem> GetShoppingCartItems()
         {
             return ShoppingCartItems ?? (ShoppingCartItems = AppDbContext.ShoppingCartItems
                                                              .Where(c => c.ShoppingCartId == ShoppingCartId)
                                                              .Include(c => c.Candy).ToList());
         }
 
-        public List<ShoppingCartItem> ClearClart()
+        public IList<ShoppingCartItem> ClearClart()
         {
             return AppDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId).ToList();
         }
 
-        public async Task<decimal> GetShoppingCartTotal()
+        public decimal GetShoppingCartTotal()
         {
-            var total = await AppDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
-                                                      .Select(c => c.Candy.Price * c.Amount).SumAsync();
+            var total = AppDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                                                      .Select(c => c.Candy.Price * c.Amount).Sum();
             return total;
         }
 

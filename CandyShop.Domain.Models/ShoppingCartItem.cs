@@ -1,6 +1,6 @@
 ﻿namespace CandyShop.Domain.Models
 {
-    public class ShoppingCartItem
+    public class ShoppingCartItem 
     {
         public int ShoppingCartItemId { get; set; }
         public string ShoppingCartId { get; set; }

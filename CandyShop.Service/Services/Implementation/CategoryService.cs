@@ -1,6 +1,4 @@
-﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.UnitOfWorks;
-using System.Threading.Tasks;
+﻿using CandyShop.Persistence.UnitOfWorks;
 
 namespace CandyShop.Service.Services.Implementation
 {
@@ -11,21 +9,6 @@ namespace CandyShop.Service.Services.Implementation
         public CategoryService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-        }
-
-        public Task CreateAsync(Category entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task DeleteAsync(Category entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task EditAsync(Category entity)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

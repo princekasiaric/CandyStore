@@ -1,8 +1,6 @@
-﻿using CandyShop.Domain.Models;
-
-namespace CandyShop.Service.Services
+﻿namespace CandyShop.Service.Services
 {
-    public interface ICategoryService : IBaseService<Category>
+    public interface ICategoryService 
     {
     }
 }

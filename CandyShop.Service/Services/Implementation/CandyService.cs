@@ -1,9 +1,6 @@
-﻿using AutoMapper;
-using CandyShop.Domain.Models;
+﻿using CandyShop.Domain.Models;
 using CandyShop.Persistence.UnitOfWorks;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CandyShop.Service.Services.Implementation
@@ -11,12 +8,10 @@ namespace CandyShop.Service.Services.Implementation
     public class CandyService : ICandyService
     {
         private readonly IUnitOfWork _unitOfWork;
-        //private readonly IMapper _mapper;
 
         public CandyService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            //_mapper = mapper;
         }
 
         public IEnumerable<Candy> GetAllCandies => _unitOfWork.Candies.GetAllCandy;
@@ -45,9 +40,9 @@ namespace CandyShop.Service.Services.Implementation
             _unitOfWork.Dispose();
         }
 
-        public async Task<Candy> GetCandyById(int id)
+        public Candy GetCandyByIdAsync(int candyId)
         {
-            return await _unitOfWork.Candies.GetCandyById(id);
+            return _unitOfWork.Candies.GetCandyById(candyId);
         }
     }
 }

@@ -6,9 +6,11 @@ namespace CandyShop.Persistence.Repository
 {
     public interface IShoppingCartRepo : IBaseRepo<ShoppingCartItem>
     {
-        Task<decimal> GetShoppingCartTotal();
-        List<ShoppingCartItem> ClearClart();
-        List<ShoppingCartItem> GetShoppingCartItems();
+        string ShoppingCartId { get; set; }
+        IList<ShoppingCartItem> ShoppingCartItems { get; set; }
+        decimal GetShoppingCartTotal();
+        IList<ShoppingCartItem> ClearClart();
+        IList<ShoppingCartItem> GetShoppingCartItems();
         ShoppingCartItem AddToCart(Candy candy);
     }
 }

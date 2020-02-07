@@ -25,20 +25,13 @@ namespace CandyShop.Controllers
             return View(model);
         }
 
-        public async Task<IActionResult> Details(int id)
+        public IActionResult Details(int id)
         {
-            var candy = await _candyService.GetCandyById(id);
+            var candy = _candyService.GetCandyByIdAsync(id);
             if (candy == null)
             {
                 return NotFound();
             }
-            //var model = new CandyDetailsViewModel
-            //{
-            //    Name = candy.Name,
-            //    ImageUrl = candy.ImageUrl,
-            //    Price = candy.Price,
-            //    Description = candy.Description
-            //};
             return View(candy);
         }
     }

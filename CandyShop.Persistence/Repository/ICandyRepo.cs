@@ -8,7 +8,7 @@ namespace CandyShop.Persistence.Repository
     {
         IEnumerable<Candy> GetAllCandy { get; }
         IEnumerable<Candy> GetCandyOnSale { get; }
-        Task<Candy> GetCandyById(int candyId);
+        Candy GetCandyById(int candyId);
         void Update(Candy candy);
     }
 }

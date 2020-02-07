@@ -1,5 +1,7 @@
-﻿using CandyShop.Persistence.Repository;
+﻿using CandyShop.Domain.Models;
+using CandyShop.Persistence.Repository;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.UnitOfWorks

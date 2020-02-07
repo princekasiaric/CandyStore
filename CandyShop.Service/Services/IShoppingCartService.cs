@@ -7,10 +7,13 @@ namespace CandyShop.Service.Services
 {
     public interface IShoppingCartService
     {
-        void GetShoppingCartItemsAsync();
+        string ShoppingCartId { get; set; }
+        IList<ShoppingCartItem> ShoppingCartItems { get; set; }
+        decimal GetShoppingCartTotalAsync();
+        IList<ShoppingCartItem> GetShoppingCartItemsAsync();
         Task ClearCartsAsync();
         Task<int> RemoveFromCartAsync(Candy candy);
-        Task GetCartAsync(IServiceProvider serviceProvider);
+        //void GetCartAsync(IServiceProvider serviceProvider);
         Task AddToCartAsync(Candy candy, int numberOfItems);
     }
 }

@@ -28,14 +28,14 @@ namespace CandyShop.Persistence.Repository
             }
         }
 
-        public async Task<Candy> GetCandyById(int candyId)
+        public Candy GetCandyById(int candyId)
         {
-            return await AppDbContext.Candies.FirstOrDefaultAsync(c => c.CandyId == candyId);
+            return AppDbContext.Candies.FirstOrDefault(c => c.CandyId == candyId);
         }
 
         public void Update(Candy candy)
         {
-            _context.Update(candy);
+            _context.Update(candy); 
         }
 
         public AppDbContext AppDbContext => _context as AppDbContext;

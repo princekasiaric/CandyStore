@@ -11,17 +11,27 @@ namespace CandyShop.Service.Services.Implementation
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public string ShoppingCartId { get; set; }
+        public string ShoppingCartId 
+        {
+            get => _unitOfWork.ShoppingCarts.ShoppingCartId;
+            set => _unitOfWork.ShoppingCarts.ShoppingCartId = value; 
+        }
+
+        public IList<ShoppingCartItem> ShoppingCartItems 
+        {
+            get => _unitOfWork.ShoppingCarts.ShoppingCartItems;
+            set => _unitOfWork.ShoppingCarts.ShoppingCartItems = value;
+        }
 
         public ShoppingCartService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        public Task GetCartAsync(IServiceProvider serviceProvider)
-        {
-            var getCarts = ShoppingCartRepo.GetCart(serviceProvider);
-        }
+        //public void GetCartAsync(IServiceProvider serviceProvider)
+        //{
+        //    var getCarts = ShoppingCartRepo.GetCart(serviceProvider);
+        //}
 
         public async Task AddToCartAsync(Candy candy, int numberOfItems)
         {
@@ -62,14 +72,14 @@ namespace CandyShop.Service.Services.Implementation
                 }
             }
             await _unitOfWork.CommitAsync();
-            _unitOfWork.Dispose();
 
             return amount;
         }
 
-        public void GetShoppingCartItemsAsync()
+        public IList<ShoppingCartItem> GetShoppingCartItemsAsync()
         {
-            throw new NotImplementedException();
+            var shoppingCartItem = _unitOfWork.ShoppingCarts.GetShoppingCartItems();
+            return shoppingCartItem;
         }
 
         public async Task ClearCartsAsync()
@@ -77,6 +87,12 @@ namespace CandyShop.Service.Services.Implementation
             var clearClarts = _unitOfWork.ShoppingCarts.ClearClart();
             _unitOfWork.ShoppingCartItems.RemoveRange(clearClarts);
             await _unitOfWork.CommitAsync();
+            _unitOfWork.Dispose();
+        }
+
+        public decimal GetShoppingCartTotalAsync()
+        {
+            return _unitOfWork.ShoppingCarts.GetShoppingCartTotal();
         }
     }
 }
