@@ -5,8 +5,11 @@ namespace CandyShop.Service.Services
 {
     public interface ICandyService : IBaseService<Candy>
     {
-        public IEnumerable<Candy> GetAllCandies { get; }
-        public IEnumerable<Candy> GetCandiesOnSale { get; }
+        IEnumerable<Candy> GetCandyByOrderBy { get; }
+        IEnumerable<Candy> GetAllCandies { get; }
+        IEnumerable<Candy> GetCandiesOnSale { get; }
+        IEnumerable<Candy> GetCandyWithCategory(string category);
         Candy GetCandyByIdAsync(int candyId);
+
     }
 }

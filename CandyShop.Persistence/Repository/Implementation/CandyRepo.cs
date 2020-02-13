@@ -1,10 +1,8 @@
 ﻿using CandyShop.Domain.Models;
 using CandyShop.Persistence.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
 {
@@ -31,6 +29,14 @@ namespace CandyShop.Persistence.Repository
         public Candy GetCandyById(int candyId)
         {
             return AppDbContext.Candies.FirstOrDefault(c => c.CandyId == candyId);
+        }
+
+        public IEnumerable<Candy> GetCandyByOrderBy
+        {
+            get
+            {
+                return AppDbContext.Candies.OrderBy(c => c.CandyId);
+            }
         }
 
         public void Update(Candy candy)

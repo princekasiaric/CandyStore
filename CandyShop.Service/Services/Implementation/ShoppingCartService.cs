@@ -1,7 +1,5 @@
 ﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.Repository.Implementation;
 using CandyShop.Persistence.UnitOfWorks;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,27 +9,14 @@ namespace CandyShop.Service.Services.Implementation
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public string ShoppingCartId 
-        {
-            get => _unitOfWork.ShoppingCarts.ShoppingCartId;
-            set => _unitOfWork.ShoppingCarts.ShoppingCartId = value; 
-        }
+        public string ShoppingCartId { get => _unitOfWork.ShoppingCarts.ShoppingCartId; set => _unitOfWork.ShoppingCarts.ShoppingCartId = value; }
 
-        public IList<ShoppingCartItem> ShoppingCartItems 
-        {
-            get => _unitOfWork.ShoppingCarts.ShoppingCartItems;
-            set => _unitOfWork.ShoppingCarts.ShoppingCartItems = value;
-        }
+        public IList<ShoppingCartItem> ShoppingCartItems { get => _unitOfWork.ShoppingCarts.ShoppingCartItems; set => _unitOfWork.ShoppingCarts.ShoppingCartItems = value; }
 
         public ShoppingCartService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
-        //public void GetCartAsync(IServiceProvider serviceProvider)
-        //{
-        //    var getCarts = ShoppingCartRepo.GetCart(serviceProvider);
-        //}
 
         public async Task AddToCartAsync(Candy candy, int numberOfItems)
         {
@@ -51,7 +36,7 @@ namespace CandyShop.Service.Services.Implementation
                 shoppingCartItem.Amount++;
             }
             await _unitOfWork.CommitAsync();
-            _unitOfWork.Dispose();
+            //_unitOfWork.Dispose();
         }
 
         public async Task<int> RemoveFromCartAsync(Candy candy)

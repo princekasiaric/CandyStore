@@ -1,5 +1,4 @@
 ﻿using CandyShop.Service.Services;
-using System.Threading.Tasks;
 
 namespace CandyShop.Models.ShoppingCartViewModels
 {

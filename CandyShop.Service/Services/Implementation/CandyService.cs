@@ -18,6 +18,8 @@ namespace CandyShop.Service.Services.Implementation
 
         public IEnumerable<Candy> GetCandiesOnSale => _unitOfWork.Candies.GetCandyOnSale;
 
+        public IEnumerable<Candy> GetCandyByOrderBy => _unitOfWork.Candies.GetCandyByOrderBy;
+
         public async Task CreateAsync(Candy candy)
         {
             await _unitOfWork.Candies.Add(candy);
@@ -43,6 +45,11 @@ namespace CandyShop.Service.Services.Implementation
         public Candy GetCandyByIdAsync(int candyId)
         {
             return _unitOfWork.Candies.GetCandyById(candyId);
+        }
+
+        public IEnumerable<Candy> GetCandyWithCategory(string category)
+        {
+            return _unitOfWork.Candies.FindByCondition(c => c.Category.CategoryName == category);
         }
     }
 }

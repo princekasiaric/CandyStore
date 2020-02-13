@@ -1,7 +1,7 @@
 ﻿using CandyShop.Models.ShoppingCartViewModels;
+using CandyShop.Persistence.Repository;
 using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace CandyShop.Controllers
 {
@@ -9,11 +9,14 @@ namespace CandyShop.Controllers
     {
         private readonly IShoppingCartService _shoppingCartService;
         private readonly ICandyService _candyService;
+        private readonly IShoppingCartRepo _shoppingCart;
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService, ICandyService candyService)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, ICandyService candyService, IShoppingCartRepo shoppingCart)
         {
             _shoppingCartService = shoppingCartService;
             _candyService = candyService;
+            _shoppingCart = shoppingCart;
+            _shoppingCartService.ShoppingCartId = _shoppingCart.ShoppingCartId;
         }
 
         public IActionResult Index()

@@ -6,6 +6,6 @@ namespace CandyShop.Persistence.Repository
     public interface ICategoryRepo
     {
         IEnumerable<Category> GetAllCategories { get; }
-        void Update(Category category);
+        string GetCategoryByName(string category);
     }
 }
