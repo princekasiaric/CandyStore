@@ -3,6 +3,7 @@ using CandyShop.Persistence.Repository.Implementation;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
 {
@@ -41,7 +42,12 @@ namespace CandyShop.Persistence.Repository
 
         public void Update(Candy candy)
         {
-            _context.Update(candy); 
+            _context.Update(candy);
+        }
+
+        public int SaveAsync()
+        {
+            return AppDbContext.SaveChanges();
         }
 
         public AppDbContext AppDbContext => _context as AppDbContext;

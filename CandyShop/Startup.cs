@@ -1,8 +1,6 @@
 using CandyShop.Persistence;
 using CandyShop.Persistence.Repository;
 using CandyShop.Persistence.Repository.Implementation;
-using CandyShop.Persistence.UnitOfWorks;
-using CandyShop.Persistence.UnitOfWorks.Implementation;
 using CandyShop.Service.Services;
 using CandyShop.Service.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
@@ -32,9 +30,11 @@ namespace CandyShop
             services.AddControllersWithViews();
             services.AddScoped<ICandyRepo, CandyRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IShoppingCartItemRepo, ShoppingCartItemRepo>();
             services.AddScoped<IShoppingCartRepo, ShoppingCartRepo>(sc => ShoppingCartRepo.GetCart(sc));
+            services.AddScoped<IOrderRepo, OrderRepo>();
+            services.AddScoped<IOrderDetailRepo, OrderDetailRepo>();
             services.AddScoped<ICandyService, CandyService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();

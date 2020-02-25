@@ -1,23 +1,23 @@
 ﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.UnitOfWorks;
+using CandyShop.Persistence.Repository;
 using System.Collections.Generic;
 
 namespace CandyShop.Service.Services.Implementation
 {
     public class CategoryService : ICategoryService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICategoryRepo _categoryRepo;
 
-        public CategoryService(IUnitOfWork unitOfWork)
+        public CategoryService(ICategoryRepo categoryRepo)
         {
-            _unitOfWork = unitOfWork;
+            _categoryRepo = categoryRepo;
         }
 
-        public IEnumerable<Category> GetCategories => _unitOfWork.Categories.GetAllCategories;
+        public IEnumerable<Category> GetCategories => _categoryRepo.GetAllCategories;
 
         public string GetCategoryName(string category)
         {
-            return _unitOfWork.Categories.GetCategoryByName(category);
+            return _categoryRepo.GetCategoryByName(category);
         }
     }
 }

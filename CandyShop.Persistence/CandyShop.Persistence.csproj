@@ -5,6 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200131005404_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200131005404_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200131031012_SeededDb.cs" />
+    <Compile Remove="Migrations\20200131031012_SeededDb.Designer.cs" />
+    <Compile Remove="Migrations\20200204043934_AddingShoppingCartItem.cs" />
+    <Compile Remove="Migrations\20200204043934_AddingShoppingCartItem.Designer.cs" />
+    <Compile Remove="Migrations\20200221041909_AddedOrder&amp;OrderDetail.cs" />
+    <Compile Remove="Migrations\20200221041909_AddedOrder&amp;OrderDetail.Designer.cs" />
+    <Compile Remove="Migrations\20200223165140_FirstMigration.cs" />
+    <Compile Remove="Migrations\20200223165140_FirstMigration.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />

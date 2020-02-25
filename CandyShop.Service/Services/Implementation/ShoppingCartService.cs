@@ -1,5 +1,5 @@
 ﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.UnitOfWorks;
+using CandyShop.Persistence.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,20 +7,24 @@ namespace CandyShop.Service.Services.Implementation
 {
     public class ShoppingCartService  : IShoppingCartService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IShoppingCartRepo _shoppingCartRepo;
+        private readonly IShoppingCartItemRepo _shoppingCartItemRepo;
 
-        public string ShoppingCartId { get => _unitOfWork.ShoppingCarts.ShoppingCartId; set => _unitOfWork.ShoppingCarts.ShoppingCartId = value; }
+        public string ShoppingCartId { get => _shoppingCartRepo.ShoppingCartId; 
+            set => _shoppingCartRepo.ShoppingCartId = value; }
 
-        public IList<ShoppingCartItem> ShoppingCartItems { get => _unitOfWork.ShoppingCarts.ShoppingCartItems; set => _unitOfWork.ShoppingCarts.ShoppingCartItems = value; }
+        public IList<ShoppingCartItem> ShoppingCartItems { get => _shoppingCartRepo.ShoppingCartItems; 
+            set => _shoppingCartRepo.ShoppingCartItems = value; }
 
-        public ShoppingCartService(IUnitOfWork unitOfWork)
+        public ShoppingCartService(IShoppingCartRepo shoppingCartRepo, IShoppingCartItemRepo shoppingCartItemRepo)
         {
-            _unitOfWork = unitOfWork;
+            _shoppingCartRepo = shoppingCartRepo;
+            _shoppingCartItemRepo = shoppingCartItemRepo;
         }
 
         public async Task AddToCartAsync(Candy candy, int numberOfItems)
         {
-            var shoppingCartItem = _unitOfWork.ShoppingCarts.AddToCart(candy);
+            var shoppingCartItem = _shoppingCartRepo.AddToCart(candy);
             if (shoppingCartItem == null)
             {
                 shoppingCartItem = new ShoppingCartItem
@@ -29,20 +33,19 @@ namespace CandyShop.Service.Services.Implementation
                     Candy = candy,
                     Amount = numberOfItems
                 };
-                await _unitOfWork.ShoppingCartItems.Add(shoppingCartItem);
+                await _shoppingCartItemRepo.Add(shoppingCartItem);
             }
             else
             {
                 shoppingCartItem.Amount++;
             }
-            await _unitOfWork.CommitAsync();
-            //_unitOfWork.Dispose();
+            var rowsAffected = _shoppingCartItemRepo.SaveAsync();
         }
 
-        public async Task<int> RemoveFromCartAsync(Candy candy)
+        public int RemoveFromCartAsync(Candy candy)
         {
             var amount = 0;
-            var shoppingCartItem = _unitOfWork.ShoppingCarts.AddToCart(candy);
+            var shoppingCartItem = _shoppingCartRepo.AddToCart(candy);
 
             if (shoppingCartItem != null)
             {
@@ -53,31 +56,30 @@ namespace CandyShop.Service.Services.Implementation
                 }
                 else
                 {
-                    _unitOfWork.ShoppingCartItems.Remove(shoppingCartItem);
+                    _shoppingCartItemRepo.Remove(shoppingCartItem);
                 }
+                _shoppingCartItemRepo.SaveAsync();
             }
-            await _unitOfWork.CommitAsync();
 
             return amount;
         }
 
         public IList<ShoppingCartItem> GetShoppingCartItemsAsync()
         {
-            var shoppingCartItem = _unitOfWork.ShoppingCarts.GetShoppingCartItems();
+            var shoppingCartItem = _shoppingCartRepo.GetShoppingCartItems();
             return shoppingCartItem;
         }
 
-        public async Task ClearCartsAsync()
+        public void ClearCartsAsync()
         {
-            var clearClarts = _unitOfWork.ShoppingCarts.ClearClart();
-            _unitOfWork.ShoppingCartItems.RemoveRange(clearClarts);
-            await _unitOfWork.CommitAsync();
-            _unitOfWork.Dispose();
+            var clearCarts = _shoppingCartRepo.ClearClart();
+            _shoppingCartItemRepo.RemoveRange(clearCarts);
+            _shoppingCartItemRepo.SaveAsync();
         }
 
         public decimal GetShoppingCartTotalAsync()
         {
-            return _unitOfWork.ShoppingCarts.GetShoppingCartTotal();
+            return _shoppingCartRepo.GetShoppingCartTotal();
         }
     }
 }

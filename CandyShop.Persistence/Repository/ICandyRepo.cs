@@ -6,6 +6,7 @@ namespace CandyShop.Persistence.Repository
 {
     public interface ICandyRepo : IBaseRepo<Candy>
     {
+        int SaveAsync();
         IEnumerable<Candy> GetCandyByOrderBy { get; }
         IEnumerable<Candy> GetAllCandy { get; }
         IEnumerable<Candy> GetCandyOnSale { get; }

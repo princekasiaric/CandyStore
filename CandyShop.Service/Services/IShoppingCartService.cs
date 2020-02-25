@@ -10,8 +10,8 @@ namespace CandyShop.Service.Services
         IList<ShoppingCartItem> ShoppingCartItems { get; set; }
         decimal GetShoppingCartTotalAsync();
         IList<ShoppingCartItem> GetShoppingCartItemsAsync();
-        Task ClearCartsAsync();
-        Task<int> RemoveFromCartAsync(Candy candy);
+        void ClearCartsAsync();
+        int RemoveFromCartAsync(Candy candy);
         Task AddToCartAsync(Candy candy, int numberOfItems);
     }
 }

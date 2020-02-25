@@ -284,6 +284,89 @@ namespace CandyShop.Persistence.Migrations
                         });
                 });
 
+            modelBuilder.Entity("CandyShop.Domain.Models.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(25)")
+                        .HasMaxLength(25);
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("OrderPlaced")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("OrderTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(5)")
+                        .HasMaxLength(5);
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("CandyShop.Domain.Models.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CandyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("CandyId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("CandyShop.Domain.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("ShoppingCartItemId")
@@ -312,6 +395,21 @@ namespace CandyShop.Persistence.Migrations
                     b.HasOne("CandyShop.Domain.Models.Category", "Category")
                         .WithMany("Candies")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CandyShop.Domain.Models.OrderDetail", b =>
+                {
+                    b.HasOne("CandyShop.Domain.Models.Candy", "Candy")
+                        .WithMany()
+                        .HasForeignKey("CandyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CandyShop.Domain.Models.Order", "Order")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository.Implementation
 {
@@ -51,6 +52,12 @@ namespace CandyShop.Persistence.Repository.Implementation
                                                       .Select(c => c.Candy.Price * c.Amount).Sum();
             return total;
         }
+
+        public int SaveAsync()
+        {
+            return AppDbContext.SaveChanges();
+        }
+
 
         public AppDbContext AppDbContext => _context as AppDbContext;
     }

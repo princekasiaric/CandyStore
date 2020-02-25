@@ -11,7 +11,9 @@ namespace CandyShop.Controllers
         private readonly ICandyService _candyService;
         private readonly IShoppingCartRepo _shoppingCart;
 
-        public ShoppingCartController(IShoppingCartService shoppingCartService, ICandyService candyService, IShoppingCartRepo shoppingCart)
+        public ShoppingCartController(IShoppingCartService shoppingCartService, 
+                                      ICandyService candyService, 
+                                      IShoppingCartRepo shoppingCart)
         {
             _shoppingCartService = shoppingCartService;
             _candyService = candyService;

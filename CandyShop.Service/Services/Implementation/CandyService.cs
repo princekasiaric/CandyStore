@@ -1,5 +1,5 @@
 ﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.UnitOfWorks;
+using CandyShop.Persistence.Repository;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,49 +7,45 @@ namespace CandyShop.Service.Services.Implementation
 {
     public class CandyService : ICandyService
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly ICandyRepo _candyRepo;
 
-        public CandyService(IUnitOfWork unitOfWork)
+        public CandyService(ICandyRepo candyRepo)
         {
-            _unitOfWork = unitOfWork;
+            _candyRepo = candyRepo;
         }
 
-        public IEnumerable<Candy> GetAllCandies => _unitOfWork.Candies.GetAllCandy;
+        public IEnumerable<Candy> GetAllCandies => _candyRepo.GetAllCandy;
 
-        public IEnumerable<Candy> GetCandiesOnSale => _unitOfWork.Candies.GetCandyOnSale;
+        public IEnumerable<Candy> GetCandiesOnSale => _candyRepo.GetCandyOnSale;
 
-        public IEnumerable<Candy> GetCandyByOrderBy => _unitOfWork.Candies.GetCandyByOrderBy;
+        public IEnumerable<Candy> GetCandyByOrderBy => _candyRepo.GetCandyByOrderBy;
 
         public async Task CreateAsync(Candy candy)
         {
-            await _unitOfWork.Candies.Add(candy);
-            await _unitOfWork.CommitAsync();
-            _unitOfWork.Dispose();
-
+            await _candyRepo.Add(candy);
+            _candyRepo.SaveAsync();
         }
 
-        public async Task DeleteAsync(Candy candy)
+        public void DeleteAsync(Candy candy)
         {
-                _unitOfWork.Candies.Remove(candy);
-                await _unitOfWork.CommitAsync();
-                _unitOfWork.Dispose();
+            _candyRepo.Remove(candy);
+            _candyRepo.SaveAsync();
         }
 
-        public async Task EditAsync(Candy candy)
+        public void EditAsync(Candy candy)
         {
-            _unitOfWork.Candies.Update(candy);
-            await _unitOfWork.CommitAsync();
-            _unitOfWork.Dispose();
+            _candyRepo.Update(candy);
+            _candyRepo.SaveAsync();
         }
 
         public Candy GetCandyByIdAsync(int candyId)
         {
-            return _unitOfWork.Candies.GetCandyById(candyId);
+            return _candyRepo.GetCandyById(candyId);
         }
 
         public IEnumerable<Candy> GetCandyWithCategory(string category)
         {
-            return _unitOfWork.Candies.FindByCondition(c => c.Category.CategoryName == category);
+            return _candyRepo.FindByCondition(c => c.Category.CategoryName == category);
         }
     }
 }

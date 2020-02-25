@@ -2,6 +2,7 @@
 using CandyShop.Persistence.Repository.Implementation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
 {
@@ -14,6 +15,11 @@ namespace CandyShop.Persistence.Repository
         public string GetCategoryByName(string category)
         {
             return AppDbContext.Categories.FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
+        }
+
+        public int SaveAsync()
+        {
+            return AppDbContext.SaveChanges();
         }
 
         public AppDbContext AppDbContext => _context as AppDbContext;

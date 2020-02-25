@@ -6,7 +6,7 @@ namespace CandyShop.Service.Services
     public interface IBaseService<TEntity> where TEntity : class 
     {
         Task CreateAsync(TEntity entity);
-        Task EditAsync(TEntity entity);
-        Task DeleteAsync(TEntity entity);
+        void EditAsync(TEntity entity);
+        void DeleteAsync(TEntity entity);
     }
 }
