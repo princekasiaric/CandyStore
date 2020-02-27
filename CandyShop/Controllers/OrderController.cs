@@ -1,11 +1,13 @@
 ﻿using CandyShop.Domain.Models;
 using CandyShop.Persistence.Repository;
 using CandyShop.Service.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace CandyShop.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;

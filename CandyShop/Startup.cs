@@ -5,6 +5,7 @@ using CandyShop.Service.Services;
 using CandyShop.Service.Services.Implementation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,8 @@ namespace CandyShop
             var connections = _config["ConnectionStrings:Default"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connections));
 
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+
             services.AddControllersWithViews();
             services.AddScoped<ICandyRepo, CandyRepo>();
             services.AddScoped<ICategoryRepo, CategoryRepo>();
@@ -42,6 +45,7 @@ namespace CandyShop
 
             services.AddHttpContextAccessor();
             services.AddSession();
+            services.AddRazorPages();
             //var config = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
             //services.AddSingleton(c => config.CreateMapper());
         }
@@ -58,6 +62,7 @@ namespace CandyShop
             app.UseSession();
             app.UseRouting();
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -65,6 +70,8 @@ namespace CandyShop
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}"
                     );
+
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -35,22 +35,28 @@ namespace CandyShop.Controllers
         public IActionResult AddToShoppingCart(int candyId)
         {
             var candy = _candyService.GetCandyByIdAsync(candyId);
-            if (candy != null)
+            if (candy == null)
             {
-                _shoppingCartService.AddToCartAsync(candy, 1);
+                return NotFound();
             }
-
+            _shoppingCartService.AddToCartAsync(candy, 1);
             return RedirectToAction(nameof(Index));
         }
 
         public IActionResult RemoveFromShoppingCart(int candyId)
         {
             var candy = _candyService.GetCandyByIdAsync(candyId);
-            if (candy != null)
+            if (candy == null)
             {
-                _shoppingCartService.RemoveFromCartAsync(candy);
+                return NotFound();
             }
+            _shoppingCartService.RemoveFromCartAsync(candy);
+            return RedirectToAction(nameof(Index));
+        }
 
+        public IActionResult ClearCart()
+        {
+            _shoppingCartService.ClearCartsAsync();
             return RedirectToAction(nameof(Index));
         }
     }
