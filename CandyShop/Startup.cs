@@ -35,6 +35,7 @@ namespace CandyShop
             services.AddScoped<IShoppingCartRepo, ShoppingCartRepo>(sc => ShoppingCartRepo.GetCart(sc));
             services.AddScoped<IOrderRepo, OrderRepo>();
             services.AddScoped<IOrderDetailRepo, OrderDetailRepo>();
+            services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ICandyService, CandyService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();

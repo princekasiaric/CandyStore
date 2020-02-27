@@ -15,6 +15,14 @@
     <Compile Remove="Migrations\20200221041909_AddedOrder&amp;OrderDetail.Designer.cs" />
     <Compile Remove="Migrations\20200223165140_FirstMigration.cs" />
     <Compile Remove="Migrations\20200223165140_FirstMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200223165503_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200223165503_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200223165552_SeededDb.cs" />
+    <Compile Remove="Migrations\20200223165552_SeededDb.Designer.cs" />
+    <Compile Remove="Migrations\20200226055740_UpdatedValidationAttribute.cs" />
+    <Compile Remove="Migrations\20200226055740_UpdatedValidationAttribute.Designer.cs" />
+    <Compile Remove="Migrations\20200226060850_UpdatedValidationAttribute.cs" />
+    <Compile Remove="Migrations\20200226060850_UpdatedValidationAttribute.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -16,22 +16,30 @@ namespace CandyShop.Domain.Models
         [Display(Name = "Last Name")]
         [StringLength(50)]
         public string LastName { get; set; }
+
         [Required(ErrorMessage = "Please enter your address.")]
         [Display(Name = "Home Address")]
-        [StringLength(25)]
+        [StringLength(100)]
         public string Address { get; set; }
+
         [Required(ErrorMessage = "Please enter your email.")]
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
         [Required(ErrorMessage ="Please enter your city.")]
         public string City { get; set; }
+
         [Required(ErrorMessage = "Please enter your state.")]
         [StringLength(2, MinimumLength = 2)]
         public string State { get; set; }
+
         [Required(ErrorMessage = "Please enter your zip.")]
+        [Display(Name ="Zip Code")]
         [StringLength(5, MinimumLength = 5)]
         public string ZipCode { get; set; }
+
         [Required(ErrorMessage = "Please enter your phone number.")]
+        [Display(Name ="Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 

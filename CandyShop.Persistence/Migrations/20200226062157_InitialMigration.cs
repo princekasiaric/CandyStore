@@ -29,7 +29,7 @@ namespace CandyShop.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(maxLength: 25, nullable: false),
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
-                    Address = table.Column<string>(maxLength: 25, nullable: false),
+                    Address = table.Column<string>(maxLength: 100, nullable: false),
                     Email = table.Column<string>(nullable: false),
                     City = table.Column<string>(nullable: false),
                     State = table.Column<string>(maxLength: 2, nullable: false),

@@ -1,5 +1,4 @@
 ﻿using CandyShop.Models.ShoppingCartViewModels;
-using CandyShop.Persistence.Repository;
 using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,7 +8,7 @@ namespace CandyShop.Components
     {
         private readonly IShoppingCartService _shoppingCartService;
 
-        public ShoppingCartSummary(IShoppingCartService shoppingCartService, IShoppingCartRepo shoppingCartRepo)
+        public ShoppingCartSummary(IShoppingCartService shoppingCartService)
         {
             _shoppingCartService = shoppingCartService;
         }
