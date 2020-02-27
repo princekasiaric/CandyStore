@@ -37,7 +37,7 @@ namespace CandyShop.Service.Services.Implementation
                 await _orderDetailRepo.Add(orderDetail);
             }
 
-            await _orderRepo.SaveAsync();
+            await _orderDetailRepo.SaveAsync();
         }
     }
 }
