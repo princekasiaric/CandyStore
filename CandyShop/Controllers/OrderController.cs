@@ -1,5 +1,4 @@
 ﻿using CandyShop.Domain.Models;
-using CandyShop.Persistence.Repository;
 using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +24,7 @@ namespace CandyShop.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(Order order)
         {
             _shoppingCartService.ShoppingCartItems = _shoppingCartService.GetShoppingCartItemsAsync();

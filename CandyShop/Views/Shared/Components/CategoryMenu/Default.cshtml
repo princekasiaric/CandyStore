@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<CandyShop.Domain.Models.Category>
+@using System.Text.Encodings.Web
 
 <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown">Categories<b class="caret"></b></a>
@@ -6,7 +7,7 @@
         @foreach (var category in Model)
         {
             <li>
-                <a asp-controller="Candy" asp-action="List" asp-route-category="@category.CategoryName">@category.CategoryName</a>
+                <a asp-controller="Candy" asp-action="List" asp-route-category="@category.CategoryName">@HtmlEncoder.Default.Encode(category.CategoryName)</a>
             </li>
         }
         <li class="divider"></li>

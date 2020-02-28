@@ -1,13 +1,14 @@
 ﻿@model CandyShop.Domain.Models.Candy
+@using System.Text.Encodings.Web
 
-<h1>@Model.Name</h1>
+<h1>@HtmlEncoder.Default.Encode(Model.Name)</h1>
 
 <div class="thumbnail">
-    <img src="@Model.ImageUrl" alt="@Model.Name" />
+    <img src="@HtmlEncoder.Default.Encode(Model.ImageUrl)" alt="@HtmlEncoder.Default.Encode(Model.Name)" />
     <div class="caption-full">
-        <h3 class="pull-right">@Model.Price.ToString("C")</h3>
-        <h3><a href="#">@Model.Name</a></h3>
-        <p>@Model.Description</p>
+        <h3 class="pull-right">@HtmlEncoder.Default.Encode(Model.Price.ToString("C"))</h3>
+        <h3><a href="#">@HtmlEncoder.Default.Encode(Model.Name)</a></h3>
+        <p>@HtmlEncoder.Default.Encode(Model.Description)</p>
     </div>
     <div class="addToCart">
         <p class="button">

@@ -1,4 +1,5 @@
 ﻿@model CandyShop.Models.ShoppingCartViewModels.ShoppingCartIndexViewModel
+@using System.Text.Encodings.Web
 
 <h2>Shopping Cart: All your candy you love</h2>
 <table class="table table-bordered table-striped">
@@ -18,16 +19,16 @@
                 <td><a asp-controller="ShoppingCart" asp-action="RemoveFromShoppingCart" asp-route-candyId=
                        "@item.Candy.CandyId">Remove Item</a></td>
                 <td class="text-center">@item.Amount</td>
-                <td class="text-left">@item.Candy.Name</td>
-                <td class="text-right">@item.Candy.Price.ToString("C")</td>
-                <td>@((item.Amount * item.Candy.Price).ToString("C"))</td>
+                <td class="text-left">@HtmlEncoder.Default.Encode(item.Candy.Name)</td>
+                <td class="text-right">@HtmlEncoder.Default.Encode(item.Candy.Price.ToString("C"))</td>
+                <td>@HtmlEncoder.Default.Encode(((item.Amount * item.Candy.Price).ToString("C")))</td>
             </tr>
         }
     </tbody>
     <tfoot>
         <tr>
             <td colspan="4" class="text-right">Total</td>
-            <td class="text-right">@Model.ShoppingCartTotal.ToString("c")</td>
+            <td class="text-right">@HtmlEncoder.Default.Encode(Model.ShoppingCartTotal.ToString("c"))</td>
         </tr>
     </tfoot>
 </table>

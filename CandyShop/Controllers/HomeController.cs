@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CandyShop.Models.HomeViewModels;
+﻿using CandyShop.Models.HomeViewModels;
 using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 

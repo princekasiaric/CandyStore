@@ -1,10 +1,8 @@
 ﻿using CandyShop.Domain.Models;
 using CandyShop.DomainModels;
-using CandyShop.Models;
 using CandyShop.Service.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CandyShop.Controllers
 {

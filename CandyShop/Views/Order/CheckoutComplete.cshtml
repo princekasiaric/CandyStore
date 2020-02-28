@@ -1,1 +1,2 @@
-﻿<h1>@ViewBag.CheckoutCompleteMessage</h1>
+﻿@using System.Text.Encodings.Web
+<h1>@HtmlEncoder.Default.Encode(ViewBag.CheckoutCompleteMessage)</h1>

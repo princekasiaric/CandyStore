@@ -1,7 +1,8 @@
 ﻿@model CandyListViewModel
+@using System.Text.Encodings.Web
 
 
-<h1>@Model.CurrentCategory</h1>
+<h1>@HtmlEncoder.Default.Encode(Model.CurrentCategory)</h1>
 @foreach (var candy in Model.Candies)
 {
     <partial name="_CandyCard" model="candy" />

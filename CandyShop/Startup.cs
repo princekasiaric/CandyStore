@@ -1,3 +1,4 @@
+using CandyShop.GlobalException;
 using CandyShop.Persistence;
 using CandyShop.Persistence.Repository;
 using CandyShop.Persistence.Repository.Implementation;
@@ -10,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace CandyShop
 {
@@ -51,16 +53,20 @@ namespace CandyShop
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.ConfigureExceptionMiddleware(logger);
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
