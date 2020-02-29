@@ -17,7 +17,7 @@ namespace CandyShop.GlobalException.CustomException
             _logger = logger.CreateLogger(typeof(Type));
         }
 
-        public async Task InVokeAsync(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {

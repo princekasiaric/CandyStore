@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace CandyShop
 {
@@ -30,7 +31,34 @@ namespace CandyShop
             var connections = _config["ConnectionStrings:Default"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connections));
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(option =>
+            {
+                option.Password.RequiredLength = 8;
+                option.Password.RequireDigit = true;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireUppercase = false;
+                option.Password.RequireLowercase = true;
+                option.Password.RequiredUniqueChars = 2;
+
+                option.Lockout.AllowedForNewUsers = true;
+                option.Lockout.MaxFailedAccessAttempts = 5;
+                option.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+                option.User.RequireUniqueEmail = true;
+
+                option.SignIn.RequireConfirmedEmail = false;
+            });
+            services.AddAuthentication().AddFacebook(option =>
+            {
+                option.AppId = _config["FacebookAppId"];
+                option.AppSecret = _config["FacebookAppSecret"];
+            }).AddGoogle(option => 
+            {
+                option.ClientId = _config["GoogleClientId"];
+                option.ClientSecret = _config["GoogleClientSecret"];
+            });
 
             services.AddControllersWithViews();
             services.AddScoped<ICandyRepo, CandyRepo>();
