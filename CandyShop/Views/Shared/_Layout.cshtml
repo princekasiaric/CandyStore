@@ -24,10 +24,10 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-controller="Home" asp-action="Index">Candies</a></li>
                         @await Component.InvokeAsync("CategoryMenu")
                         <li><a asp-controller="Contact" asp-action="Index">Contact Us</a></li>
-                         @await Component.InvokeAsync("ShoppingCartSummary")
+                        @await Component.InvokeAsync("ShoppingCartSummary")
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>
@@ -42,6 +42,11 @@
             </div>
             <div class="col-md-9">
                 @RenderBody()
+                <br /><br />
+                <hr style="background-color:black;" />
+                <footer class="text-center">
+                    <p> Copyright &copy; @DateTime.UtcNow.Year CandyShop </p>
+                </footer>
             </div>
         </div>
         @RenderSection("Scripts", required: false)
