@@ -1,6 +1,5 @@
 ﻿using CandyShop.Domain.Models;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace CandyShop.Persistence.Repository
 {
@@ -11,6 +10,5 @@ namespace CandyShop.Persistence.Repository
         IEnumerable<Candy> GetAllCandy { get; }
         IEnumerable<Candy> GetCandyOnSale { get; }
         Candy GetCandyById(int candyId);
-        void Update(Candy candy);
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace CandyShop.Service.Services
 {
-    public interface ICandyService : IBaseService<Candy>
+    public interface ICandyService 
     {
         IEnumerable<Candy> GetCandyByOrderBy { get; }
         IEnumerable<Candy> GetAllCandies { get; }

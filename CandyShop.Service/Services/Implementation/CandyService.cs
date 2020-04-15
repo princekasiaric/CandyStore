@@ -20,24 +20,6 @@ namespace CandyShop.Service.Services.Implementation
 
         public IEnumerable<Candy> GetCandyByOrderBy => _candyRepo.GetCandyByOrderBy;
 
-        public async Task CreateAsync(Candy candy)
-        {
-            await _candyRepo.Add(candy);
-            _candyRepo.SaveAsync();
-        }
-
-        public void DeleteAsync(Candy candy)
-        {
-            _candyRepo.Remove(candy);
-            _candyRepo.SaveAsync();
-        }
-
-        public void EditAsync(Candy candy)
-        {
-            _candyRepo.Update(candy);
-            _candyRepo.SaveAsync();
-        }
-
         public Candy GetCandyByIdAsync(int candyId)
         {
             return _candyRepo.GetCandyById(candyId);

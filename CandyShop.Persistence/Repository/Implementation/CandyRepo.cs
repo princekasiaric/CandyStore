@@ -40,11 +40,6 @@ namespace CandyShop.Persistence.Repository
             }
         }
 
-        public void Update(Candy candy)
-        {
-            _context.Update(candy);
-        }
-
         public int SaveAsync()
         {
             return AppDbContext.SaveChanges();
